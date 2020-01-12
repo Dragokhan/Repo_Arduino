@@ -1,0 +1,25 @@
+#define DELAY 1000
+#define POTPIN A0
+
+void setup()
+{
+ for(int i = 2; i <= 11; ++i) {
+  pinMode(i, OUTPUT); 
+ }
+ Serial.begin(9600);
+}
+
+int temp;
+
+void loop()
+{
+  int pot = analogRead(POTPIN);
+  pot = map(pot, 0, 1023, 2, 11);
+  Serial.print("Led = ");
+  Serial.println(pot);
+  if(temp != pot) {
+      digitalWrite(temp, LOW);
+  }
+  digitalWrite(pot, HIGH);
+  temp = pot;
+}
